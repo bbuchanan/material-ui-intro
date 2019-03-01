@@ -30,7 +30,7 @@ export default ({
               </Typography>
               <List component="ul">
                 {exercises.map(exercise => (
-                  <ListItem key={id} button onClick={() => onSelect(exercise.id)}>
+                  <ListItem key={exercise.id} button onClick={() => onSelect(exercise.id)}>
                     <ListItemText primary={exercise.title} />
                   </ListItem>
                 ))}

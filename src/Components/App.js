@@ -28,9 +28,13 @@ const app = () => {
     setCurrentExercise(exercises.find(x => x.id === id));
   };
 
+  const handleExerciseCreate = exercise => {
+    setExercises(prevState => [...prevState, exercise]);
+  };
+
   return (
     <>
-      <Header />
+      <Header muscles={muscles} onExerciseCreate={handleExerciseCreate} />
       <Exercises
         category={currentCategory}
         exercise={currentExercise}
