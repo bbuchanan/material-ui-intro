@@ -8,6 +8,7 @@ const app = () => {
   const [exercises, setExercises] = useState(initialExercises);
   const [currentCategory, setCurrentCategory] = useState();
   const [currentExercise, setCurrentExercise] = useState({});
+  const [editMode, setEditMode] = useState(false);
 
   const getExercisesByMuscle = () => {
     const initExercises = muscles.reduce(
@@ -28,32 +29,39 @@ const app = () => {
     );
   };
 
-  const handleCategorySelected = category => {
-    setCurrentCategory(category);
-  };
-
-  const handleExerciseSelected = id => {
-    setCurrentExercise(exercises.find(x => x.id === id));
-  };
-
-  const handleExerciseCreate = exercise => {
-    setExercises(prevState => [...prevState, exercise]);
-  };
+  const handleCategorySelected = category => setCurrentCategory(category);
+  const handleExerciseSelected = id => setCurrentExercise(exercises.find(x => x.id === id));
+  const handleExerciseCreate = exercise => setExercises(prevState => [...prevState, exercise]);
 
   const handleExerciseDelete = id => {
     const newExercises = exercises.filter(ex => ex.id !== id);
     setExercises(newExercises);
   };
 
+  const handleExerciseSelectEdit = id => {
+    setCurrentExercise(exercises.find(x => x.id === id));
+    setEditMode(true);
+  };
+
+  const handleExerciseEdit = exercise => {
+    const updatedExercises = [...exercises.filter(ex => ex.id !== exercise.id), exercise];
+    setExercises(updatedExercises);
+    setEditMode(true);
+  };
+
   return (
     <>
       <Header muscles={muscles} onExerciseCreate={handleExerciseCreate} />
       <Exercises
+        editMode={editMode}
         category={currentCategory}
+        muscles={muscles}
         exercise={currentExercise}
         exercises={getExercisesByMuscle()}
         onSelect={handleExerciseSelected}
         onDelete={handleExerciseDelete}
+        onSelectEdit={handleExerciseSelectEdit}
+        onEdit={handleExerciseEdit}
       />
       <Footer category={currentCategory} onSelect={handleCategorySelected} muscles={muscles} />
     </>
