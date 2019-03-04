@@ -27,7 +27,7 @@ const createDialog = ({ onCreate, muscles }) => {
       <Button variant="contained" mini onClick={handleToggle}>
         <Add />
       </Button>
-      <Dialog open={open} onClose={handleToggle} aria-labelledby="form-dialog-title">
+      <Dialog maxWidth="sm" fullWidth open={open} onClose={handleToggle} aria-labelledby="form-dialog-title">
         <DialogTitle>Create a New Exercise</DialogTitle>
         <DialogContent>
           <DialogContentText>Please fill out the form below.</DialogContentText>

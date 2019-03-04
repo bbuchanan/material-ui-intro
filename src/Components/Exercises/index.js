@@ -62,17 +62,13 @@ const index = ({
     </Grid>
     <Grid item xs={12} sm={6}>
       <Paper className={classes.Paper}>
+        <Typography gutterBottom variant="headline" style={{ textTransform: "capitalize" }}>
+          {title}
+        </Typography>
         {editMode ? (
-          <FormControl exercise={exercise} muscles={muscles} onSubmit={onEdit} />
+          <FormControl key={id} exercise={exercise} muscles={muscles} onSubmit={onEdit} />
         ) : (
-          <>
-            <Typography variant="headline" style={{ textTransform: "capitalize" }}>
-              {title}
-            </Typography>
-            <Typography style={{ marginTop: 20 }} variant="subheading">
-              {description}
-            </Typography>
-          </>
+          <Typography variant="subheading">{description}</Typography>
         )}
       </Paper>
     </Grid>

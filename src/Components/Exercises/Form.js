@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField, InputLabel, MenuItem, FormControl, Select } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
-  FormControl: {
-    width: 250
-  }
-});
-
-const formControl = ({ muscles: categories, classes, exercise, onSubmit }) => {
+const formControl = ({ muscles: categories, exercise, onSubmit }) => {
   const [exerciseState, setExerciseState] = useState({ title: "", description: "", muscles: "" });
 
   useEffect(
@@ -39,15 +32,9 @@ const formControl = ({ muscles: categories, classes, exercise, onSubmit }) => {
 
   return (
     <>
-      <TextField
-        value={exerciseState.title}
-        label="Title"
-        className={classes.FormControl}
-        onChange={handleChange("title")}
-        margin="normal"
-      />
+      <TextField value={exerciseState.title} label="Title" onChange={handleChange("title")} margin="normal" fullWidth />
       <br />
-      <FormControl className={classes.FormControl}>
+      <FormControl fullWidth>
         <InputLabel htmlFor="muscles">Muscles</InputLabel>
         <Select value={exerciseState.muscles} onChange={handleChange("muscles")}>
           {categories.map(m => (
@@ -59,20 +46,25 @@ const formControl = ({ muscles: categories, classes, exercise, onSubmit }) => {
       </FormControl>
       <br />
       <TextField
-        className={classes.FormControl}
         multiline
         rows="4"
         label="Description"
         onChange={handleChange("description")}
         value={exerciseState.description}
         margin="normal"
+        fullWidth
       />
       <br />
-      <Button color="primary" variant="contained" onClick={handleSubmit}>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={handleSubmit}
+        disabled={!exerciseState.title || !exerciseState.muscles}
+      >
         {exercise ? "Edit" : "Create"}
       </Button>
     </>
   );
 };
 
-export default withStyles(styles)(formControl);
+export default formControl;
