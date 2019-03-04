@@ -4,6 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { Header, Footer } from "./Layouts";
 import Exercises from "./Exercises";
 import { initialExercises, muscles } from "./store";
+import { ExerciseContext } from "../context";
 
 const app = () => {
   const [exercises, setExercises] = useState(initialExercises);
@@ -54,23 +55,29 @@ const app = () => {
     setExercises(updatedExercises);
   };
 
+  const getContext = () => ({
+    muscles,
+    exercisesByMuscles: getExercisesByMuscle(),
+    category: currentCategory,
+    exercise: currentExercise,
+    onCreate: handleExerciseCreate,
+    onCategorySelect: handleCategorySelected,
+    onEdit: handleExerciseEdit,
+    onSelectEdit: handleExerciseSelectEdit,
+    onDelete: handleExerciseDelete,
+    onSelect: handleExerciseSelected,
+    editMode: editMode
+  });
+
   return (
-    <>
-      <CssBaseline />
-      <Header muscles={muscles} onExerciseCreate={handleExerciseCreate} />
-      <Exercises
-        editMode={editMode}
-        category={currentCategory}
-        muscles={muscles}
-        exercise={currentExercise}
-        exercises={getExercisesByMuscle()}
-        onSelect={handleExerciseSelected}
-        onDelete={handleExerciseDelete}
-        onSelectEdit={handleExerciseSelectEdit}
-        onEdit={handleExerciseEdit}
-      />
-      <Footer category={currentCategory} onSelect={handleCategorySelected} muscles={muscles} />
-    </>
+    <ExerciseContext.Provider value={getContext()}>
+      <>
+        <CssBaseline />
+        <Header />
+        <Exercises exercise={currentExercise} />
+        <Footer />
+      </>
+    </ExerciseContext.Provider>
   );
 };
 

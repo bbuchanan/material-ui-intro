@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import withWidth from "@material-ui/core/withWidth";
 
-const footer = ({ muscles, category, onSelect, width }) => {
+import { ExerciseContext } from "../../context";
+
+const footer = ({ category, width }) => {
+  const { muscles, onCategorySelect } = useContext(ExerciseContext);
+
   const index = category ? muscles.findIndex(group => group === category) + 1 : 0;
-  const onIndexSelect = (e, index) => onSelect(index === 0 ? "" : muscles[index - 1]);
+  const onIndexSelect = (e, index) => onCategorySelect(index === 0 ? "" : muscles[index - 1]);
 
   return (
     <AppBar position="static">

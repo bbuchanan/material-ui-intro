@@ -8,14 +8,14 @@ const styles = {
     flex: 1
   }
 };
-const header = ({ classes, muscles, onExerciseCreate }) => {
+const header = ({ classes, onExerciseCreate }) => {
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography component="h2" variant="h5" color="inherit" className={classes.flex}>
           Exercise Database
         </Typography>
-        <CreateDialog muscles={muscles} onCreate={onExerciseCreate} />
+        <CreateDialog />
       </Toolbar>
     </AppBar>
   );

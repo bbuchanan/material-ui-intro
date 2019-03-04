@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Dialog, Button } from "@material-ui/core";
 
@@ -10,7 +10,9 @@ import { Add } from "@material-ui/icons";
 
 import Form from "./Form";
 
-const createDialog = ({ onCreate, muscles }) => {
+import { ExerciseContext } from "../../context";
+
+const createDialog = () => {
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
@@ -22,6 +24,7 @@ const createDialog = ({ onCreate, muscles }) => {
     onCreate(exercise);
   };
 
+  const { muscles, onCreate } = useContext(ExerciseContext);
   return (
     <>
       <Button variant="contained" color="secondary" mini onClick={handleToggle}>
