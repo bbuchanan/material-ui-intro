@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { Header, Footer } from "./Layouts";
 import Exercises from "./Exercises";
@@ -39,8 +40,8 @@ const app = () => {
   const handleExerciseDelete = id => {
     const newExercises = exercises.filter(ex => ex.id !== id);
     setExercises(newExercises);
-    setEditMode(false);
-    setCurrentExercise({});
+    setEditMode(currentExercise.id === id ? false : editMode);
+    setCurrentExercise(currentExercise.id === id ? {} : currentExercise);
   };
 
   const handleExerciseSelectEdit = id => {
@@ -55,6 +56,7 @@ const app = () => {
 
   return (
     <>
+      <CssBaseline />
       <Header muscles={muscles} onExerciseCreate={handleExerciseCreate} />
       <Exercises
         editMode={editMode}

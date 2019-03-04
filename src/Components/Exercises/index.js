@@ -3,22 +3,23 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import { Delete, Edit } from "@material-ui/icons";
+import { withStyles } from "@material-ui/core/styles";
 
 import FormControl from "./Form";
 
 import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction } from "@material-ui/core";
 
-const styles = {
+const styles = theme => ({
   Paper: {
     overflowY: "auto",
     padding: 20,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
     height: 500
   }
-};
+});
 
-export default ({
+const index = ({
+  classes,
   exercises,
   muscles,
   category,
@@ -31,8 +32,8 @@ export default ({
   exercise: { id, title = "Welcome!", description = "Please select an exercise from the list on the left." }
 }) => (
   <Grid container>
-    <Grid item sm>
-      <Paper style={styles.Paper}>
+    <Grid item xs={12} sm={6}>
+      <Paper className={classes.Paper}>
         {exercises.map(([group, exercises]) =>
           !category || category === group ? (
             <Fragment key={group}>
@@ -59,8 +60,8 @@ export default ({
         )}
       </Paper>
     </Grid>
-    <Grid item sm>
-      <Paper style={styles.Paper}>
+    <Grid item xs={12} sm={6}>
+      <Paper className={classes.Paper}>
         {editMode ? (
           <FormControl exercise={exercise} muscles={muscles} onSubmit={onEdit} />
         ) : (
@@ -77,3 +78,5 @@ export default ({
     </Grid>
   </Grid>
 );
+
+export default withStyles(styles)(index);
