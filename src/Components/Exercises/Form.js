@@ -8,7 +8,7 @@ const styles = theme => ({
   }
 });
 
-const form = ({ muscles: categories, classes, exercise, onSubmit }) => {
+const formControl = ({ muscles: categories, classes, exercise, onSubmit }) => {
   const [exerciseState, setExerciseState] = useState({ title: "", description: "", muscles: "" });
 
   useEffect(
@@ -33,7 +33,7 @@ const form = ({ muscles: categories, classes, exercise, onSubmit }) => {
 
   const handleSubmit = () => {
     // TODO: validate
-    const exercise = { ...exerciseState, id: exerciseState.title.toLowerCase().replace(/ /g, "-") };
+    const exercise = { id: exerciseState.title.toLowerCase().replace(/ /g, "-"), ...exerciseState };
     onSubmit(exercise);
   };
 
@@ -75,4 +75,4 @@ const form = ({ muscles: categories, classes, exercise, onSubmit }) => {
   );
 };
 
-export default withStyles(styles)(form);
+export default withStyles(styles)(formControl);

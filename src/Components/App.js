@@ -30,12 +30,17 @@ const app = () => {
   };
 
   const handleCategorySelected = category => setCurrentCategory(category);
-  const handleExerciseSelected = id => setCurrentExercise(exercises.find(x => x.id === id));
+  const handleExerciseSelected = id => {
+    setCurrentExercise(exercises.find(x => x.id === id));
+    setEditMode(false);
+  };
   const handleExerciseCreate = exercise => setExercises(prevState => [...prevState, exercise]);
 
   const handleExerciseDelete = id => {
     const newExercises = exercises.filter(ex => ex.id !== id);
     setExercises(newExercises);
+    setEditMode(false);
+    setCurrentExercise({});
   };
 
   const handleExerciseSelectEdit = id => {
@@ -46,7 +51,6 @@ const app = () => {
   const handleExerciseEdit = exercise => {
     const updatedExercises = [...exercises.filter(ex => ex.id !== exercise.id), exercise];
     setExercises(updatedExercises);
-    setEditMode(true);
   };
 
   return (

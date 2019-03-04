@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import { Delete, Edit } from "@material-ui/icons";
 
-import Form from "./Form";
+import FormControl from "./Form";
 
 import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction } from "@material-ui/core";
 
@@ -62,7 +62,7 @@ export default ({
     <Grid item sm>
       <Paper style={styles.Paper}>
         {editMode ? (
-          <Form exercise={exercise} muscles={muscles} onSubmit={onEdit} />
+          <FormControl exercise={exercise} muscles={muscles} onSubmit={onEdit} />
         ) : (
           <>
             <Typography variant="headline" style={{ textTransform: "capitalize" }}>
