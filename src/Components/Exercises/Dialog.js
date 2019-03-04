@@ -24,7 +24,7 @@ const createDialog = ({ onCreate, muscles }) => {
 
   return (
     <>
-      <Button variant="contained" mini onClick={handleToggle}>
+      <Button variant="contained" color="secondary" mini onClick={handleToggle}>
         <Add />
       </Button>
       <Dialog maxWidth="sm" fullWidth open={open} onClose={handleToggle} aria-labelledby="form-dialog-title">
